@@ -18,32 +18,19 @@ int ft_error(fd, **buf, **line)
         return (-1);
     if (!*buf)
     {
-        if (!(char*)malloc(sizeof(char*) BUFFER_SIZE + 1))
-        {
-            free(buf);
+        if (read(fd, *buf, 0) == -1))
             return (-1);
-        }
     }
     return (0);
 }
 
 int	get_next_line(int fd, char **line)
 {
-    static char buf{BUFFER_SIZE};
-
-
     if (ft_error(fd, &buf, line) < -1)
         return (-1);
-    
-
-
-	read(fd, buf, BUFFER_SIZE)
+    read(fd, buf, BUFFER_SIZE)
 }
 
-int main()
-{
-    fd = open("bonjour", O_RDONLY);
-    ft_putnbr(fd);
-    close(fd);
-    return (0);
-}
+gerer les erreurs de bases
+lire une ligne 
+retourner l'interger en focntion de ce qui est lu on non
