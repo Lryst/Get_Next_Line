@@ -21,7 +21,7 @@
 
 int		get_next_line(int fd, char **line);
 int		ft_strlen(char *str);
-char	*ft_strchr(const char *str, int c);
+int		ft_strspn(char *set, char u);
 char	*ft_strjoinfree(char *s1, char *s2);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 char    *ft_newstring(size_t i);

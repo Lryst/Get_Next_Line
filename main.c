@@ -9,7 +9,17 @@ int main()
     fd = open("./bonjour.txt", O_RDONLY);
     printf("FD : %d\n", fd);
 	printf("GET NEXT LINE : %d\n", get_next_line(fd, &line));
-	printf("LINE : %s\n", line); 
+	printf("LINE : %s\n", line);
+    free(line);
+    line = NULL;
+    printf("GET NEXT LINE : %d\n", get_next_line(fd, &line));
+	printf("LINE : %s\n", line);
+    free(line);
+    line = NULL;
+    printf("GET NEXT LINE : %d\n", get_next_line(fd, &line));
+	printf("LINE : %s\n", line);
+    free(line);
+    line = NULL;
     close(fd);
     return (0);
 }

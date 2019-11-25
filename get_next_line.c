@@ -11,48 +11,47 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#define BUFFER_SIZE 45
 
-char	*ft_strchr(const char *str, int c)
+int	ft_strspn(char *set, char u)
 {
-	char *s;
+	int i;
 
-	s = (char*)str;
-	while (*s != c)
+	i = 0;
+	while (set[i])
 	{
-		if (*s == '\0')
-			return (NULL);
-		s++;
+		if (set[i] == u)
+			return (1);
+		i++;
 	}
-	return (s);
+	return (0);
 }
+
 
 char	*ft_strjoinfree(char *s1, char *s2)
 {
 	char		*tab;
-	long int	i;
-	long int	u;
+	int	i;
+	int	u;
 
 	i = 0;
 	u = 0;
-	write(1, "lucie join\n", 12);
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	write(1, "luciiiiie\n", 10);
 	tab = (char*)malloc(sizeof(char) * (ft_strlen((char *)s1) +
 				ft_strlen((char *)s2)) + 1);
-	printf("TAB : %s\n", tab);
 	if (tab == NULL)
 		return (NULL);
-	while (s1[i++])
+	while (s1[i])
+	{
 		tab[i] = s1[i];
+		i++;
+	}
 	while (s2[u])
 		tab[i++] = s2[u++];
 	tab[i] = '\0';
-	if (s1)
-	{
-		free((void*)s1);
-		s1 = NULL;
-	}
+	free((void*)s1);
+	s1 = NULL;
 	return (tab);
 }
 
@@ -103,17 +102,15 @@ int	get_next_line(int fd, char **line)
 	int ret;
 	static char *tmp;
 	
-
-	printf("FDD : %d\n", fd);
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || read(fd, buf, 0) < 0)
 		return (-1);
+	tmp = ft_newstring(0);
 	while((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		printf("BUFF : %s\n", buf);
 		if (!(tmp = ft_strjoinfree(tmp, buf)))
-			return (12);
-        if (ft_strchr(*line, '\n'))
+			return (-1);
+        if (ft_strspn(tmp, '\n'))
 			break;
 	}
 	return(ft_intline(line, tmp));

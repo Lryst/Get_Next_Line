@@ -70,6 +70,8 @@ char		*ft_newstring(size_t i)
 	while (str && zero < i + 1)
 	{
 		str[zero] = '\0';
+		zero++;
+		
 	}
 	return (str);
 }
