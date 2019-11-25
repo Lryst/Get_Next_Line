@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:11:35 by lryst             #+#    #+#             */
-/*   Updated: 2019/11/25 15:58:28 by lryst            ###   ########.fr       */
+/*   Updated: 2019/11/25 17:25:42 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,25 @@ char	*ft_strjoinfree(char *s1, char *s2)
 
 	i = 0;
 	u = 0;
+	write(1, "lucie join\n", 12);
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
+	write(1, "luciiiiie\n", 10);
 	tab = (char*)malloc(sizeof(char) * (ft_strlen((char *)s1) +
 				ft_strlen((char *)s2)) + 1);
+	printf("TAB : %s\n", tab);
 	if (tab == NULL)
 		return (NULL);
-	while (s1[i])
-	{
+	while (s1[i++])
 		tab[i] = s1[i];
-		i++;
-	}
 	while (s2[u])
 		tab[i++] = s2[u++];
 	tab[i] = '\0';
-	free((void*)s1);
-	s1 = NULL;
+	if (s1)
+	{
+		free((void*)s1);
+		s1 = NULL;
+	}
 	return (tab);
 }
 
@@ -96,7 +99,7 @@ static int		ft_intline(char **line, char *str)
 
 int	get_next_line(int fd, char **line)
 {
-	static char buf[BUFFER_SIZE + 1];
+	char buf[BUFFER_SIZE + 1];
 	int ret;
 	static char *tmp;
 	
@@ -109,10 +112,9 @@ int	get_next_line(int fd, char **line)
 		buf[ret] = '\0';
 		printf("BUFF : %s\n", buf);
 		if (!(tmp = ft_strjoinfree(tmp, buf)))
-			return (-1);
+			return (12);
         if (ft_strchr(*line, '\n'))
 			break;
 	}
 	return(ft_intline(line, tmp));
 }
-
