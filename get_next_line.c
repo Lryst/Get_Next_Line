@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define BUFFER_SIZE 45
 
 int	ft_strspn(char *set, char u)
 {
@@ -68,31 +67,31 @@ static int		ft_strfind(char *str)
 	return (-1);
 }
 
-static int		ft_intline(char **line, char *str)
+static int		ft_intline(char **line, char *tmp)
 {
-	char	*tmp;
+	char	*str;
 	int		i;
 
-	if (!ft_strlen(str))
+	if (!ft_strlen(tmp))
 		return (0);
-	i = ft_strfind(str);
+	i = ft_strfind(tmp);
 	if (i != -1)
 	{
-		tmp = ft_newstring(i);
-		ft_memcpy(tmp, str, i);
-		tmp[i] = '\0';
-		*line = ft_strdup(tmp);
-		free(tmp);
-		tmp = ft_strdup(str);
+		str = ft_newstring(i);
+		ft_memcpy(str, tmp, i);
+		str[i] = '\0';
+		*line = ft_strdup(str);
 		free(str);
-		str = ft_strdup(tmp + i + 1);
+		str = ft_strdup(tmp);
 		free(tmp);
-		tmp = NULL;
+		tmp = ft_strdup(str + i + 1);
+		free(str);
+		str = NULL;
 		return (1);
 	}
-	*line = ft_strdup(str);
-	free(str);
-	str = NULL;
+	*line = ft_strdup(tmp);
+	free(tmp);
+	tmp = NULL;
 	return (1);
 }
 
@@ -104,13 +103,14 @@ int	get_next_line(int fd, char **line)
 	
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || read(fd, buf, 0) < 0)
 		return (-1);
+	*line = NULL;
 	tmp = ft_newstring(0);
 	while((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
 		if (!(tmp = ft_strjoinfree(tmp, buf)))
 			return (-1);
-        if (ft_strspn(tmp, '\n'))
+        if (ft_strspn(buf, '\n'))
 			break;
 	}
 	return(ft_intline(line, tmp));

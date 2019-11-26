@@ -1,25 +1,79 @@
 #include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
 
-
-int main()
+int		main()
 {
-	int fd;
-	char *line;
+    int fd;
+	static char *line = NULL;
 
-    fd = open("./bonjour.txt", O_RDONLY);
-    printf("FD : %d\n", fd);
-	printf("GET NEXT LINE : %d\n", get_next_line(fd, &line));
-	printf("LINE : %s\n", line);
-    free(line);
-    line = NULL;
-    printf("GET NEXT LINE : %d\n", get_next_line(fd, &line));
-	printf("LINE : %s\n", line);
-    free(line);
-    line = NULL;
-    printf("GET NEXT LINE : %d\n", get_next_line(fd, &line));
-	printf("LINE : %s\n", line);
-    free(line);
-    line = NULL;
-    close(fd);
-    return (0);
+	fd = open("./bonjour.txt", O_RDONLY);
+    printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+	printf("resultat : \n|%D|   ", get_next_line(fd, &line));
+    printf("LINE : %s\n", line);
+	free(line);
+	line = NULL;
+    return (0);   
 }
