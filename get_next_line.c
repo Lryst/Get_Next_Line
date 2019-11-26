@@ -49,7 +49,7 @@ char	*ft_strjoinfree(char *s1, char *s2)
 	while (s2[u])
 		tab[i++] = s2[u++];
 	tab[i] = '\0';
-	free((void*)s1);
+	free(s1);
 	s1 = NULL;
 	return (tab);
 }
@@ -82,10 +82,14 @@ static int		ft_intline(char **line, char *tmp)
 		str[i] = '\0';
 		*line = ft_strdup(str);
 		free(str);
+		str = NULL;
 		str = ft_strdup(tmp);
 		free(tmp);
+		tmp = NULL;
+		printf("tmp1 : %s\n", tmp);
 		tmp = ft_strdup(str + i + 1);
 		free(str);
+		printf("tmp2 : %s\n", tmp);
 		str = NULL;
 		return (1);
 	}
@@ -104,13 +108,17 @@ int	get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || read(fd, buf, 0) < 0)
 		return (-1);
 	*line = NULL;
+	printf("tmp4 : %s\n", tmp);
 	tmp = ft_newstring(0);
 	while((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
+		printf("buf :%s\n", buf);
+		printf("tmp avant strjoinfree : %s\n", tmp);
 		if (!(tmp = ft_strjoinfree(tmp, buf)))
 			return (-1);
-        if (ft_strspn(buf, '\n'))
+		printf("tmp apres strjoinfree : %s\n", tmp);
+        if (ft_strspn(tmp, '\n'))
 			break;
 	}
 	return(ft_intline(line, tmp));
