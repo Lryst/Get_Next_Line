@@ -6,13 +6,13 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:11:35 by lryst             #+#    #+#             */
-/*   Updated: 2019/11/25 17:25:42 by lryst            ###   ########.fr       */
+/*   Updated: 2019/11/27 18:00:09 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strspn(char *set, char u)
+int		ft_strspn(char *set, char u)
 {
 	int i;
 
@@ -20,18 +20,17 @@ int	ft_strspn(char *set, char u)
 	while (set[i])
 	{
 		if (set[i] == u)
-			return (1);
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
-
 
 char	*ft_strjoinfree(char *s1, char *s2)
 {
-	char		*tab;
-	int	i;
-	int	u;
+	char	*tab;
+	int		i;
+	int		u;
 
 	i = 0;
 	u = 0;
@@ -54,72 +53,47 @@ char	*ft_strjoinfree(char *s1, char *s2)
 	return (tab);
 }
 
-static int		ft_strfind(char *str)
-{
-	int i;
-
-	i = -1;
-	if (!str)
-		return (-1);
-	while (str[++i])
-		if (str[i] == '\n')
-			return (i);
-	return (-1);
-}
-
-static int		ft_intline(char **line, char *tmp)
+int		ft_intline(char **line, char **tmp)
 {
 	char	*str;
 	int		i;
 
-	if (!ft_strlen(tmp))
+	if (*line)
+		free(*line);
+	if (!ft_strlen(*tmp))
 		return (0);
-	i = ft_strfind(tmp);
+	i = ft_strspn(*tmp, '\n');
 	if (i != -1)
 	{
-		str = ft_newstring(i);
-		ft_memcpy(str, tmp, i);
-		str[i] = '\0';
-		*line = ft_strdup(str);
-		free(str);
-		str = NULL;
-		str = ft_strdup(tmp);
-		free(tmp);
-		tmp = NULL;
-		printf("tmp1 : %s\n", tmp);
-		tmp = ft_strdup(str + i + 1);
-		free(str);
-		printf("tmp2 : %s\n", tmp);
-		str = NULL;
+		*line = ft_newstring(i + 1);
+		ft_memcpy(*line, *tmp, i);
+		(*line)[i] = '\0';
+		str = ft_strdup(*tmp + i + 1);
+		free(*tmp);
+		*tmp = str;
 		return (1);
 	}
-	*line = ft_strdup(tmp);
-	free(tmp);
-	tmp = NULL;
+	*line = ft_strdup(*tmp);
+	free(*tmp);
+	*tmp = NULL;
 	return (1);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
-	char buf[BUFFER_SIZE + 1];
-	int ret;
-	static char *tmp;
-	
+	char		buf[BUFFER_SIZE + 1];
+	int			ret;
+	static char *tmp = NULL;
+
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || read(fd, buf, 0) < 0)
 		return (-1);
-	*line = NULL;
-	printf("tmp4 : %s\n", tmp);
-	tmp = ft_newstring(0);
-	while((ret = read(fd, buf, BUFFER_SIZE)) > 0)
+	if (!tmp)
+		tmp = ft_newstring(0);
+	while (ft_strspn(tmp, '\n') == -1 && (ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		printf("buf :%s\n", buf);
-		printf("tmp avant strjoinfree : %s\n", tmp);
 		if (!(tmp = ft_strjoinfree(tmp, buf)))
 			return (-1);
-		printf("tmp apres strjoinfree : %s\n", tmp);
-        if (ft_strspn(tmp, '\n'))
-			break;
 	}
-	return(ft_intline(line, tmp));
+	return (ft_intline(line, &tmp));
 }

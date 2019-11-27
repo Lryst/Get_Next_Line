@@ -6,18 +6,18 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:11:31 by lryst             #+#    #+#             */
-/*   Updated: 2019/11/25 15:57:53 by lryst            ###   ########.fr       */
+/*   Updated: 2019/11/27 17:09:36 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strlen(char *str)
+int		ft_strlen(char *str)
 {
 	int i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -59,10 +59,10 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dst);
 }
 
-char		*ft_newstring(size_t i)
+char	*ft_newstring(size_t i)
 {
-	char *str;
-	size_t zero;
+	char	*str;
+	size_t	zero;
 
 	zero = 0;
 	if (!(str = (char*)malloc(sizeof(char) * i + 1)))
@@ -71,7 +71,6 @@ char		*ft_newstring(size_t i)
 	{
 		str[zero] = '\0';
 		zero++;
-		
 	}
 	return (str);
 }

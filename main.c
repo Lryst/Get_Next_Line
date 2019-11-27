@@ -5,55 +5,15 @@
 int		main()
 {
     int fd;
-	static char *line = NULL;
+	int ret;
+	char *line;
 
+	line = NULL;
 	fd = open("./bonjour.txt", O_RDONLY);
-		printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;
-		printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;
-		printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;
-		printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;
-		printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;printf("resultat : \n|%D|   ", get_next_line(fd, &line));
-		printf("LINE : %s\n", line);
-		free(line);
-		line = NULL;
+	while ((ret = get_next_line(fd, &line)) == 1)
+	{
+		printf("%d->%s\n", ret, line);
+	}
+	printf("ret final : %d\n", ret);
     return (0);   
 }
