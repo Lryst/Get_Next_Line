@@ -15,5 +15,6 @@ int		main()
 		printf("%d->%s\n", ret, line);
 	}
 	printf("ret final : %d\n", ret);
-    return (0);   
+	system("leaks a.out");
+    return (0);
 }
