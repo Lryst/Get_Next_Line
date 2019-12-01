@@ -61,7 +61,10 @@ int		ft_intline(char **line, char **tmp)
 	if (*line)
 		free(*line);
 	if (!ft_strlen(*tmp))
+	{
+		*line = ft_newstring(0);
 		return (0);
+	}
 	i = ft_strspn(*tmp, '\n');
 	if (i != -1)
 	{
@@ -76,7 +79,7 @@ int		ft_intline(char **line, char **tmp)
 	*line = ft_strdup(*tmp);
 	free(*tmp);
 	*tmp = NULL;
-	return (1);
+	return (0);
 }
 
 int		get_next_line(int fd, char **line)
