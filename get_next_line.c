@@ -6,11 +6,17 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:11:35 by lryst             #+#    #+#             */
-/*   Updated: 2019/11/27 17:07:23 by lryst            ###   ########.fr       */
+/*   Updated: 2019/12/02 16:34:30 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	ft_free(char ***str)
+{
+	free(**str);
+	**str = NULL;
+}
 
 int		ft_strspn(char *set, char u)
 {
@@ -59,10 +65,11 @@ int		ft_intline(char **line, char **tmp)
 	int		i;
 
 	if (*line)
-		free(*line);
+		ft_free(&line);
 	if (!ft_strlen(*tmp))
 	{
 		*line = ft_newstring(0);
+		ft_free(&tmp);
 		return (0);
 	}
 	i = ft_strspn(*tmp, '\n');
@@ -72,13 +79,12 @@ int		ft_intline(char **line, char **tmp)
 		ft_memcpy(*line, *tmp, i);
 		(*line)[i] = '\0';
 		str = ft_strdup(*tmp + i + 1);
-		free(*tmp);
+		ft_free(&tmp);
 		*tmp = str;
 		return (1);
 	}
 	*line = ft_strdup(*tmp);
-	free(*tmp);
-	*tmp = NULL;
+	ft_free(&tmp);
 	return (0);
 }
 

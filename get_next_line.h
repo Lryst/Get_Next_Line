@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:05:25 by lryst             #+#    #+#             */
-/*   Updated: 2019/11/27 17:08:35 by lryst            ###   ########.fr       */
+/*   Updated: 2019/12/02 16:15:34 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+void	ft_free(char ***str);
 int		get_next_line(int fd, char **line);
 int		ft_strlen(char *str);
 int		ft_strspn(char *set, char u);
