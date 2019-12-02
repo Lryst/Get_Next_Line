@@ -64,8 +64,6 @@ int		ft_intline(char **line, char **tmp)
 	char	*str;
 	int		i;
 
-	if (*line)
-		ft_free(&line);
 	if (!ft_strlen(*tmp))
 	{
 		*line = ft_newstring(0);
